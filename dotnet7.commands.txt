@@ -1,0 +1,49 @@
+
+<add key="Artifactory" value="https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget" protocolVersion="3" />
+
+ dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.EntityFrameworkCore.Sqlite -v 7.0.13 -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget
+ 
+ search for extensions:
+ microsoft.entityframeworkcore
+ 
+ install EF migrate tool:
+ dotnet tool install --global dotnet-ef --version 7.0.13 --add-source https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget
+ 
+ list dontet tools installed
+ dotnet tool list -g
+ 
+ 
+ ef create 1 db migration:
+ 
+ dotnet ef migrations add InitialCreate -o Data/Migrations
+ 
+ ef - update db : 
+ 
+ dotnet ef database update
+ 
+ dotnet ef database drop
+ 
+ 
+ REACT:
+ 
+ get strted with Vite - create react project
+ 
+ https://vitejs.dev/guide/
+ 
+ 
+ Material UI
+ 
+ https://mui.com/material-ui/getting-started/installation/
+ 
+ 1) Default installation (in client folder)
+ 2) Roboto font
+ 3) Icons
+ 
+ 4)npm i react-toastify
+ 
+ -----Add basket migration ----
+ * add new models(entities) + relations one-many, run migration
+ dotnet ef migrations add BasketEntityAdded
+ 
+ ---Add LoadingButton - MUI UI Lab ----
+ npm install @mui/lab @mui/material
