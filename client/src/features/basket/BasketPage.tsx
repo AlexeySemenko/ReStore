@@ -67,11 +67,9 @@ export default function BasketPage() {
                                 </TableCell>
                                 <TableCell align="right">${(row.price / 100 * row.quantity).toFixed(2)}</TableCell>
                                 <TableCell align="right">
-                                    <IconButton color='error'>
-                                    <LoadingButton loading={status.loading && status.name === 'del'+ row.productId} onClick={() => handleRemoveItem(row.productId, row.quantity, 'del' + row.productId)}  color='error'>
+                                    <LoadingButton loading={status.loading && status.name === 'del'+ row.productId}  color='error'  onClick={() => handleRemoveItem(row.productId, row.quantity, 'del' + row.productId)}>
                                         <Delete />
                                     </LoadingButton>
-                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}
