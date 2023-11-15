@@ -1,27 +1,33 @@
-import agent from "../../app/api/agent";
 import LoadingComponent from "../../app/layouts/LoadingComponent";
-import { Product } from "../../app/models/products";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { fetchProductsAsync, productSelectors } from "./CatalogSlice";
 import ProductList from "./ProductList";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Catalog(){
 
-    const [products, setProducts] = useState<Product[]>([]);
-    const [loading, setLoading] = useState(true);
+    const products = useAppSelector(productSelectors.selectAll);
+    const dispatch = useAppDispatch();
+    const {productsLoaded} = useAppSelector(state => state.catalog);
 
     useEffect(() => {
     //   fetch('http://localhost:5000/api/products')
     //     .then(response => response.json())
     //     .then(data => setProducts(data));
     // 
-      agent.Catalog.list()
-      .then(data => setProducts(data))
-      .catch(error => console.log(error))
-      .finally(() => setLoading(false));
-    }, []); //without [] dependancy, it will be called every rerender, not only 1st load
+      // agent.Catalog.list()
+      // .then(data => setProducts(data))
+      // .catch(error => console.log(error))
+      // .finally(() => setLoading(false));
+
+      if(!productsLoaded){
+        dispatch(fetchProductsAsync());
+      }
+
+    }, [productsLoaded, dispatch]); //without [] dependancy, it will be called every rerender, not only 1st load
 
 
-    if(loading)
+    if(status.includes('pending'))
       return <LoadingComponent message="Loading catalog..."/>
   
     // function addProduct() {
