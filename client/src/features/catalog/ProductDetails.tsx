@@ -7,14 +7,17 @@ import NotFound from "../../app/errors/NotFound";
 import LoadingComponent from "../../app/layouts/LoadingComponent";
 import { useStoreContext } from "../../app/context/StoreContext";
 import { LoadingButton } from "@mui/lab";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { removeItem, setBasket } from "../basket/BasketSlice";
 
 export default function ProductDetails(){
 
-    const {basket, setBasket, removeItem} = useStoreContext();
+    const {basket} = useAppSelector(state => state.basket);
+    const dispatch = useAppDispatch();
     const {id} = useParams<{id: string}>();
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
-    const [quantity, setQuantity] = useState('');
+    const [quantity, setQuantity] = useState(0); //('') TODO - bug with my setBasket!!!
     const [submitting, setSubmitting] = useState(false);
     const item = basket?.items.find(i => i.productId == product?.id);
 
@@ -23,7 +26,8 @@ export default function ProductDetails(){
         // axios.get(`http://localhost:5000/api/products/${id}`)
 
         if(item){
-            setQuantity(quantity == '' ? (item.quantity || 0) + '' : quantity);
+            //setQuantity(quantity == '' ? (item.quantity || 0) + '' : quantity); //TTODO: bug with my setBasket!!!
+            setQuantity(item.quantity);
         }
         
         id && agent.Catalog.details(parseInt(id))
@@ -44,14 +48,14 @@ export default function ProductDetails(){
         if(!item || +quantity > item.quantity){
             const updatedQuantity = item ? +quantity - item.quantity : +quantity;
             agent.Basket.addItem(product?.id!, updatedQuantity)
-              //  .then(basket => setBasket(basket))
+                .then(basket => dispatch(setBasket(basket.value)))
                 .catch(error => console.log(error))
                 .finally(() => setSubmitting(false));
 
         }else{
             const updatedQuantity = item ? item.quantity - +quantity : +quantity;
             agent.Basket.removeItem(product?.id!, +updatedQuantity)
-             //   .then(() => removeItem(product?.id!, updatedQuantity))
+                .then(() => dispatch(removeItem({productId: product?.id!, quantity: updatedQuantity})))
                 .catch(error => console.log(error))
                 .finally(() => setSubmitting(false));
 
