@@ -6,7 +6,7 @@ export default function BasketSummary() {
     const {basket} = useAppSelector(state => state.basket);
 
     const subtotal = basket?.items.reduce((sum, itm) => sum + itm.price * itm.quantity, 0) || 0;
-    const deliveryFee = (subtotal >= 10000 ? 500 : 0);;
+    const deliveryFee = (subtotal >= 10000 ? 500 : 0);
 
 
     return (

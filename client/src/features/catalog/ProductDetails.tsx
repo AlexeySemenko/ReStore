@@ -102,7 +102,8 @@ export default function ProductDetails(){
                     </Grid>
                     <Grid item xs={6}>
                         <LoadingButton disabled={item?.quantity === +quantity || !item && +quantity == 0}
-                         sx={{height: '55px'}} color='primary' size="large" variant="contained" fullWidth loading={status.includes('pendingRemoveItem' + item?.productId)} onClick={handleUpdateCart}>
+                         sx={{height: '55px'}} color='primary' size="large" variant="contained" fullWidth loading={status.includes('pending')} 
+                         onClick={handleUpdateCart}>
                             {item ? 'Update quantity' : 'Add to cart'}
                         </LoadingButton>
                     </Grid>

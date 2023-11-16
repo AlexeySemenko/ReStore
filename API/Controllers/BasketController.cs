@@ -49,7 +49,7 @@ namespace API.Controllers
             Product product = await this.context.Products.FindAsync(productId);
             if (product == null)
             {
-                return NotFound();
+                return BadRequest(new ProblemDetails{Title = "Product not found"});
             }
 
             //add item
