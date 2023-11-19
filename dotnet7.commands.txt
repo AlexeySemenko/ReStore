@@ -1,5 +1,30 @@
+----setup vscode----
+nugets:
 
+settings -> nuget gallery - sources
+{"name": "nuget.org","url": "https://api.nuget.org/v3/index.json"}
+{"name": "ArtifactoryCP","url": "https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget" }
+
+-------set up .NET project:---------
+dotnet new sln
+mkdir API
+dotnet new webapi -o API
+dotnet sln add API
+dotnet restore API.csproj -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget
+dotnet new gitignore
+
+
+
+
+run lint(react validation):
+npm run lint
+
+set up CP artifactory:
+
+in config:
 <add key="Artifactory" value="https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget" protocolVersion="3" />
+
+with a command (that worked) :
 
  dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.EntityFrameworkCore.Sqlite -v 7.0.13 -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget
  
@@ -24,14 +49,28 @@
  dotnet ef database drop
  
  
- REACT:
+ REACT
  
- get strted with Vite - create react project
+  get strted with Vite - create react project
  
  https://vitejs.dev/guide/
  
+ npm create vite@latest
+ 
+ npm i redux react-redux
+ npm install @reduxjs/toolkit
+ 
+
+ 
  
  Material UI
+ npm install @mui/material @emotion/react @emotion/styled
+ 
+ npm install @mui/lab @mui/material
+ npm install @mui/icons-material
+ npm install @fontsource/roboto
+ 
+ 
  
  https://mui.com/material-ui/getting-started/installation/
  
@@ -47,3 +86,27 @@
  
  ---Add LoadingButton - MUI UI Lab ----
  npm install @mui/lab @mui/material
+ 
+ 
+ ------------REDUX--------------
+ redux.js.ord
+ 
+ 
+----in project - packegaes------
+npm i react-router-dom
+npm i axios
+npm i redux react-redux
+
+
+------------Identity--------------
+
+install Microsoft.AspNetCore.Authentication.JwtBearer  nuget (ctrl+p >Nuget gallery, search for: microsoft.aspnetcore.auth, check - API project, install)
+
+command: dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.AspNetCore.Authentication.JwtBearer -v 8.0.0 -s https://api.nuget.org/v3/index.json    ----NOT WORKING IN CP
+
+1) dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.AspNetCore.Authentication.JwtBearer -v 7.0.13  -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget --WORKING (run several times, lastly it works)
+
+2) dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 7.0.13 -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget (same - run 4 times... :) )
+
+
+ 
