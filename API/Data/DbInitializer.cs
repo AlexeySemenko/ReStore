@@ -1,4 +1,5 @@
 using API.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Data
 {
@@ -8,12 +9,36 @@ namespace API.Data
         /// Fill the ProductTable with init data
         /// </summary>
         /// <param name="context"></param>
-        public static void Initialize(StoreContext context)
+        public static async Task Initialize(StoreContext context, UserManager<User> userManager)
         {
+
+            if(!userManager.Users.Any())
+            {
+                var user = new User
+                {
+                    UserName = "Alexey",
+                    Email = "alexey@test.com"
+                };
+
+                await userManager.CreateAsync(user, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(user, "Member");
+
+                var admin = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@test.com"
+                };
+
+                await userManager.CreateAsync(admin, "Pa$$w0rd");
+                await userManager.AddToRolesAsync(admin, new [] { "Member", "Admin"});
+            };
+
             if(context.Products.Any())
             {
                 return;
             }
+
+
 
             var products = new List<Product>()
             {   

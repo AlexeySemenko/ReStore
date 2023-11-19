@@ -14,11 +14,8 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class BasketController : BaseApiController
     {
-        private readonly StoreContext context;
-        public BasketController(StoreContext context)
+        public BasketController(StoreContext context) : base(context)
         {
-            this.context = context;
-            
         }
 
         [HttpGet(Name = "GetBasket")]
@@ -102,16 +99,7 @@ namespace API.Controllers
             return basket;
         }
 
-        private async Task<IActionResult> SaveContextChanges(string errorMsg, IActionResult objectResult)
-        {
-            bool result = await this.context.SaveChangesAsync() > 0;
-
-            if (result)
-                return objectResult;
-            else
-                return BadRequest(new ProblemDetails { Title = errorMsg });
-        }
-
+        
         private static ActionResult<BasketDto> MapBasketToDto(Basket basket)
         {
             return new BasketDto

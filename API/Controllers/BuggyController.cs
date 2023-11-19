@@ -8,6 +8,11 @@ namespace API.Controllers
 {
     public class BuggyController : BaseApiController
     {
+        public BuggyController(): base(null)
+        {
+            
+        }
+
         [HttpGet("not-found")]
         public ActionResult GetNotFound()
         {

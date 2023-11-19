@@ -14,7 +14,8 @@ dotnet restore API.csproj -s https://artifactory-product.checkpoint.com/artifact
 dotnet new gitignore
 
 
-
+****run watch with no reload ****
+dotnet watch --no-hot-reload
 
 run lint(react validation):
 npm run lint
@@ -107,6 +108,12 @@ command: dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.AspN
 1) dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.AspNetCore.Authentication.JwtBearer -v 7.0.13  -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget --WORKING (run several times, lastly it works)
 
 2) dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 7.0.13 -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget (same - run 4 times... :) )
+
+
+**** setup Identity in code (services, roles, users)
+
+***add new migration to create Identity tables in our db ****
+dotnet ef migrations add IdentityAdded
 
 
  

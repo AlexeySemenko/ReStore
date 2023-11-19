@@ -16,10 +16,8 @@ namespace API.Controllers
     {
         private readonly StoreContext context;
         
-        public ProductsController(StoreContext context)
+        public ProductsController(StoreContext context) : base(context)
         {
-            this.context = context;
-            
         }
 
         [HttpGet]
