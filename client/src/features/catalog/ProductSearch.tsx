@@ -17,6 +17,7 @@ export default function ProductSearch(){
             label='Search products'
             variant='outlined'
             fullWidth
+            name='txtSearchTerm'
             value={searchTerm || ''}
             onChange={(event:any) => {
                 setSearchTerm(event.target.value);
