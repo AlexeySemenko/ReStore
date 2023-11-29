@@ -81,11 +81,13 @@ namespace API.Controllers
 
             if(orderDTO.SaveAddress)
             {
-                User user = await context.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+                User user = await context.Users
+                    .Include(u => u.Address)
+                    .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
                 if(user!= null)
                 {
-                    user.Address = new UserAddress
+                    UserAddress address = new UserAddress
                     {
                         FullName = orderDTO.ShippingAddress.FullName,
                         Address1 = orderDTO.ShippingAddress.Address1,
@@ -95,8 +97,8 @@ namespace API.Controllers
                         State = orderDTO.ShippingAddress.State,
                         Zip = orderDTO.ShippingAddress.Zip
                     };
-
-                    context.Update(user);
+                    user.Address = address;
+                    //context.Update(user);  //not need that cos our entity is being tracked by EF
                 }
             }
 

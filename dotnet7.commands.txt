@@ -120,4 +120,7 @@ dotnet ef migrations add IdentityAdded
 dotnet ef database drop
 dotnet ef migrations add OrderEntityAdded -o Data/Migrations
 
+***** Yup validators - react hook form
+npm i @hookform/resolvers yup
+
  

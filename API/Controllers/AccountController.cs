@@ -96,5 +96,12 @@ namespace API.Controllers
                 Basket = userBasket?.MapBasketToDto()
             };
         }
+
+        [Authorize]
+        [HttpGet("savedAddress")]
+        public async Task<ActionResult<UserAddress>> GetSavedAddress()
+        {
+            return await userManager.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Address).FirstOrDefaultAsync();
+        }
     }
 }
