@@ -116,4 +116,8 @@ command: dotnet add d:/course/demo/ReStore/API/API.csproj package Microsoft.AspN
 dotnet ef migrations add IdentityAdded
 
 
+**** drop db before refactoring the User tables for Id = int
+dotnet ef database drop
+dotnet ef migrations add OrderEntityAdded -o Data/Migrations
+
  
