@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -18,7 +20,7 @@ namespace API.Controllers
             this.context = context;
         }
 
-        protected async Task<IActionResult> SaveContextChanges(string errorMsg, IActionResult objectResult)
+        protected async Task<ActionResult> SaveContextChanges(string errorMsg, ActionResult objectResult)
         {
             bool result = await this.context.SaveChangesAsync() > 0;
 
@@ -26,6 +28,19 @@ namespace API.Controllers
                 return objectResult;
             else
                 return BadRequest(new ProblemDetails { Title = errorMsg });
+        }
+
+        protected async Task<Basket> RetrieveBasket(string buyerId)
+        {
+            if(string.IsNullOrEmpty(buyerId)){
+                Response.Cookies.Delete("buyerId");
+                return null;
+            }
+
+            return await this.context.Baskets
+                            .Include(i => i.Items)
+                            .ThenInclude(p => p.Product)
+                            .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
         }
 
     }

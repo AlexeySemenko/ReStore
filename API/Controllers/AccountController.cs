@@ -58,18 +58,7 @@ namespace API.Controllers
             };
         }
 
-        private async Task<Basket> RetrieveBasket(string buyerId)
-        {
-            if(string.IsNullOrEmpty(buyerId)){
-                Response.Cookies.Delete("buyerId");
-                return null;
-            }
-
-            return await this.context.Baskets
-                            .Include(i => i.Items)
-                            .ThenInclude(p => p.Product)
-                            .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
-        }
+        
 
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterDto registerDto)

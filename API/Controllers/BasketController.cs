@@ -52,7 +52,7 @@ namespace API.Controllers
             basket.AddItem(product, quantity);
 
             //save changes
-            IActionResult actResult = CreatedAtRoute("GetBasket", basket.MapBasketToDto());
+            ActionResult actResult = CreatedAtRoute("GetBasket", basket.MapBasketToDto());
             return await SaveContextChanges("Problem adding item to basket", actResult);
         }
 
@@ -82,19 +82,6 @@ namespace API.Controllers
             string buyerId = GetBuyerId();
 
             return await RetrieveBasket(buyerId);
-        }
-
-        private async Task<Basket> RetrieveBasket(string buyerId)
-        {
-            if(string.IsNullOrEmpty(buyerId)){
-                Response.Cookies.Delete("buyerId");
-                return null;
-            }
-
-            return await this.context.Baskets
-                            .Include(i => i.Items)
-                            .ThenInclude(p => p.Product)
-                            .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
         }
 
         private string GetBuyerId()

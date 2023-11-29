@@ -90,7 +90,7 @@ namespace API.Data.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("Proce")
+                    b.Property<long>("Price")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
