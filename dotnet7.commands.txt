@@ -135,4 +135,6 @@ dotnet ef migrations add PaymentIntentAdded
 
 npm install --save @stripe/react-stripe-js @stripe/stripe-js
 
+
+stripe listen -f http://localhost:5000/api/payments/webhook -e charge.succeeded
  
