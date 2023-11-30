@@ -123,4 +123,13 @@ dotnet ef migrations add OrderEntityAdded -o Data/Migrations
 ***** Yup validators - react hook form
 npm i @hookform/resolvers yup
 
+
+******Stripe ****************
+stripe emergency code - hbkn-kgya-qtfv-qocb-jinv
+
+(run 2 times)
+dotnet add d:/course/demo/ReStore/API/API.csproj package Stripe.net -v 43.4.0 -s https://artifactory-product.checkpoint.com/artifactory/api/nuget/v3/nuget
+
+dotnet ef migrations add PaymentIntentAdded
+
  
