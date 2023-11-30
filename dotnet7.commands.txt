@@ -132,4 +132,7 @@ dotnet add d:/course/demo/ReStore/API/API.csproj package Stripe.net -v 43.4.0 -s
 
 dotnet ef migrations add PaymentIntentAdded
 
+
+npm install --save @stripe/react-stripe-js @stripe/stripe-js
+
  
