@@ -6,7 +6,7 @@ Material Icon Theme
 Auto Rename Tag
 C#
 C# Dev Kit
-
+C# Extensions
 
 To run:
 react - npm start from client dir

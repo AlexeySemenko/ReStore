@@ -4,7 +4,7 @@ import { router } from "../router/router";
 import { PaginatedResponse } from "../models/pagination";
 import { store } from "../store/configureStore";
 
-axios.defaults.baseURL = "http://localhost:5000/api/";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 //TODO - remove loading sleep!!!
@@ -22,7 +22,9 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    await sleep();
+
+    if(import.meta.env.DEV)
+        await sleep();
 
     const pagination = response.headers['pagination']; //always be lowercase in axios!!
 

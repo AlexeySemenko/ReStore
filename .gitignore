@@ -477,3 +477,5 @@ $RECYCLE.BIN/
 *.lnk
 package-lock.json
 client/package-lock.json
+**/wwwroot
+**/*.db-*

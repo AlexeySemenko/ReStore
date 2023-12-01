@@ -1,4 +1,4 @@
-import { Box, Grid, Pagination, Paper, Typography } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import LoadingComponent from "../../app/layouts/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { fetchFilters, fetchProductsAsync, productSelectors, setPageNumber, setProductParams } from "./CatalogSlice";
