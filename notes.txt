@@ -148,8 +148,10 @@ dotnet ef migrations add PaymentIntentAdded
 
 npm install --save @stripe/react-stripe-js @stripe/stripe-js
 
-
+to run local stripe console for answer of payment simulation:
 stripe listen -f http://localhost:5000/api/payments/webhook -e charge.succeeded
+
+copy whsec_...... code into WhSecret settings
 
 
 ************slick carousel*****************
