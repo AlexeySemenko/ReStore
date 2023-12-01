@@ -3,10 +3,13 @@ extensions:
 
 Material Icon Theme
 .NET Install Tool
+NuGet Gallery
 Auto Rename Tag
 C#
 C# Dev Kit
 C# Extensions
+PostgreSQL
+Docker
 
 To run:
 react - npm start from client dir
@@ -156,4 +159,16 @@ copy whsec_...... code into WhSecret settings
 
 ************slick carousel*****************
 npm i react-slick @types/react-slick slick-carousel
- 
+
+
+*****docker postgres****
+docker run --name dev -e POSTGRES_USER=appuser -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:latest
+
+dotnet add c:/git/MyLearn/ReStore/ReStore/API/API.csproj package Npgsql.EntityFrameworkCore.PostgreSQL -v 7.0.11 -s https://api.nuget.org/v3/index.json
+
+**create Dockerfile and .dockerignore, then build image:
+docker build -t alexeysemenko/restore .
+docker run --rm -it -p 8080:80 alexeysemenko/restore
+
+docker login
+docker push alexeysemenko/restore:latest
