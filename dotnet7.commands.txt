@@ -1,4 +1,12 @@
 ----setup vscode----
+extensions:
+
+Material Icon Theme
+.NET Install Tool
+Auto Rename Tag
+C#
+C# Dev Kit
+
 nugets:
 
 settings -> nuget gallery - sources
