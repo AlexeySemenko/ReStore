@@ -7,6 +7,11 @@ Auto Rename Tag
 C#
 C# Dev Kit
 
+
+To run:
+react - npm start from client dir
+dotnet watch run - from api dir
+
 nugets:
 
 settings -> nuget gallery - sources
