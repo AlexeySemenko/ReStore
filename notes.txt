@@ -178,3 +178,6 @@ docker push alexeysemenko/restore:latest
 https://fly.io/
 
  fly secrets set JWTSettings__TokenKey=H3er6pY0sxgXsLLjwVb8oz9eaiHNHY0XTCW95t6ztgG5krvyPiFMNm2Mu63pQhFg
+
+
+ https://github.com/docker/build-push-action
