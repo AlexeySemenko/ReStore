@@ -1,4 +1,4 @@
-import { Button, IconButton, Menu, MenuItem, useMediaQuery, useTheme } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/configureStore";
 import { signOut } from "../../features/account/accountSlice";
@@ -13,9 +13,6 @@ export default function SignedInMenu() {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-    const theme = useTheme();
-    const isMD = useMediaQuery(theme.breakpoints.down('md'));
-
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -26,16 +23,12 @@ export default function SignedInMenu() {
 
     return (
         <>
-            {!isMD ? (
-            <Button onClick={handleClick} color='inherit' sx={{typography:'h6'}}>
-                {user?.email}
-            </Button>
-            ): (
-            <IconButton  onClick={handleClick} color='inherit'>
+            
+            <IconButton  onClick={handleClick} color='inherit' title={user?.email}>
                 <Person />
             </IconButton>
-            )
-            }
+
+            {user ? (
             <Menu
                 anchorEl={anchorEl}
                 open={open}
@@ -48,6 +41,17 @@ export default function SignedInMenu() {
                     dispatch(clearBasket());
                 }}>Logout</MenuItem>
             </Menu>
+            ) : (
+                
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+            >
+                <MenuItem component={Link} to='/login'>Login</MenuItem>
+                <MenuItem component={Link} to='/register'>Register</MenuItem>
+            </Menu>
+            )}
         </>
     );
 }

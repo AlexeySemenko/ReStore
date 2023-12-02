@@ -107,7 +107,7 @@ export default function Register() {
 
                     <Grid item>
                         <Link to="/login">
-                            {"Already have an account? Sign Up"}
+                            {"Already have an account? Log In"}
                         </Link>
                     </Grid>
                 </Grid>

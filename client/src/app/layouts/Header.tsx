@@ -10,12 +10,6 @@ const midLinks = [
     {title: 'contact', path: '/contact'}
 ]
 
-const rightLinks = [
-    {title: 'login', path: '/login'},
-    {title: 'register', path: '/register'},
-]
-
-
 interface Props {
     isDarkMode: boolean,
     darkModeChange: () => void
@@ -36,19 +30,22 @@ const navStyles = {
         md: 20,
         sm: 15,
         xs: 15
-      }
+      },
+    p: {
+        xs:0,
+        md:1
+    }
 };
 
 export default function Header({ isDarkMode, darkModeChange }: Props) {
 
     const {basket} = useAppSelector(state => state.basket);
-    const {user} = useAppSelector(state => state.account);
 
     const itemsCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:{ md: 'center', xs: 'start'}, pt: {md:0, xs:1}}}>
+            <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:{ md: 'center', xs: 'start'}, p: {md:2, xs:1}}}>
                 <Box display='flex' alignItems='center'>
                     <Typography variant="h6" component={NavLink} to='/' sx={navStyles}>
                         RE-STORE
@@ -69,22 +66,13 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                 </List>
                 
                 <Box display='flex' alignItems='center'>
-                    <IconButton component={Link} to='/basket' size="large" edge='start' color='inherit' sx={{mr: 2}}>
+                    <IconButton component={Link} to='/basket' size="large" edge='start' color='inherit' sx={{mh: 1}}>
                         <Badge badgeContent={itemsCount} color='secondary'>
                             <ShoppingCart />
                         </Badge>
                     </IconButton>
-                    {user ? (
-                        <SignedInMenu />
-                    ) : (
-                    <List sx={{display: 'flex'}}>
-                        {rightLinks.map(({title, path}) => (
-                            <ListItem component={NavLink} to={path} key={path} sx={navStyles}>
-                                {title.toUpperCase()}
-                            </ListItem>
-                        ))}
-                    </List>
-                    )}
+                   
+                    <SignedInMenu />
                 </Box>
             </Toolbar>
         </AppBar>
