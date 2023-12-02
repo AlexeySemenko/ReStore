@@ -172,3 +172,9 @@ docker run --rm -it -p 8080:80 alexeysemenko/restore
 
 docker login
 docker push alexeysemenko/restore:latest
+
+
+****deployment to fly.io (free up to 3 vms) 12/2023*****
+https://fly.io/
+
+ fly secrets set JWTSettings__TokenKey=H3er6pY0sxgXsLLjwVb8oz9eaiHNHY0XTCW95t6ztgG5krvyPiFMNm2Mu63pQhFg
