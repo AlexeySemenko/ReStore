@@ -30,7 +30,13 @@ const navStyles = {
     '&.active': {
         color: 'text.secondary'
     },
-    textDecoration: 'none'
+    textDecoration: 'none',
+    fontSize: {
+        lg: 20,
+        md: 20,
+        sm: 15,
+        xs: 15
+      }
 };
 
 export default function Header({ isDarkMode, darkModeChange }: Props) {
@@ -42,7 +48,7 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:{ md: 'center', xs: 'start'}, pt: {md:0, xs:1}}}>
                 <Box display='flex' alignItems='center'>
                     <Typography variant="h6" component={NavLink} to='/' sx={navStyles}>
                         RE-STORE
@@ -50,7 +56,7 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                     <Switch checked={isDarkMode} onChange={darkModeChange} />
                 </Box>
                 
-                <List sx={{display: 'flex'}}>
+                <List sx={{display: 'flex', flexDirection: { md:'row', xs:'column' }}}>
                     {midLinks.map(({title, path}) => (
                         <ListItem 
                             component={NavLink} 

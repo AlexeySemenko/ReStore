@@ -41,8 +41,8 @@ export default function Catalog(){
   
       //Grid spacing like in bootstrap - 12 parts, 3 + 9 here... (2 columns 3 and 9)
     return (
-        <Grid container columnSpacing={4}> 
-          <Grid item xs={3}>
+        <Grid container columnSpacing={4} columns={{ xs: 4, md: 12 }}> 
+          <Grid item md={3} xs={4}>
             <Paper sx={{mb: 2}}>
               <ProductSearch />
             </Paper>
@@ -60,11 +60,11 @@ export default function Catalog(){
               <CheckBoxButtons items={types} checked={productParams.types || []} onChange={(items: string[]) => dispatch(setProductParams({types: items}))} />
             </Paper>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item md={9} xs={4}>
             <ProductList products={products} />
           </Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={9} sx={{mb: 2}}>
+          <Grid item md={3} xs={0}></Grid>
+          <Grid item md={9} xs={4} sx={{mb: 2, mt: 1}}>
             {metaData &&
               <AppPAgination metaData={metaData} onPageChange={(page: number) => dispatch(setPageNumber({pageNumber: page}))} />
             }
