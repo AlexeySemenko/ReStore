@@ -179,5 +179,16 @@ https://fly.io/
 
  fly secrets set JWTSettings__TokenKey=H3er6pY0sxgXsLLjwVb8oz9eaiHNHY0XTCW95t6ztgG5krvyPiFMNm2Mu63pQhFg
 
-
+***add docker deploy to github action****
  https://github.com/docker/build-push-action
+
+
+ ****add fly api token****
+ run in terminal - fly auth token
+
+ see remote logs in fly --- 
+ fly apps list
+ fly logs -a alexey-restore
+
+ ****connect from vscode postgres to fly.io with proxy to db*****
+  fly proxy 6543:5432 -a alexey-postgres
