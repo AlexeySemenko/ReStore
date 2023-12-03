@@ -21,7 +21,7 @@ const navStyles = {
     '&:hover': {
         color: 'grey.500'
     },
-    '&.active': {
+    '&.active:not(.MuiTypography-root)': {
         color: 'text.secondary'
     },
     textDecoration: 'none',
@@ -45,9 +45,9 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:{ md: 'center', xs: 'start'}, p: {md:2, xs:1}}}>
+            <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:{ md: 'center', xs: 'start'}, p: {md:0, xs:0}}}>
                 <Box display='flex' alignItems='center'>
-                    <Typography variant="h6" component={NavLink} to='/' sx={navStyles}>
+                    <Typography variant="h6" component={NavLink} to='/' sx={{...navStyles, p: 1}}>
                         RE-STORE
                     </Typography>
                     <Switch checked={isDarkMode} onChange={darkModeChange} />
@@ -59,7 +59,7 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                             component={NavLink} 
                             to={path}
                             key={path + '' + title} 
-                            sx={navStyles}>
+                            sx={{...navStyles, p: {md:1, xs:0}}}>
                             {title.toUpperCase()}
                         </ListItem>
                     ))}

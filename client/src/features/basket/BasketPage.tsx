@@ -13,8 +13,8 @@ export default function BasketPage() {
         <>
            <BasketTable items={basket.items} />
             <Grid container>
-                <Grid item xs={6} />
-                <Grid item xs={6}>
+                <Grid item md={6} xs={12} />
+                <Grid item md={6} xs={12} >
                     <BasketSummary />
                     <Button
                         component={Link}

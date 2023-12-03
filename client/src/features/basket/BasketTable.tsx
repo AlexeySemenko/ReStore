@@ -16,7 +16,7 @@ export default function BasketTable({items, isBasket = true}: Props){
 
     return (
         <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
+        <Table sx={{ minWidth: { md: 650 } }}>
             <TableHead>
                 <TableRow>
                     <TableCell>Product</TableCell>
