@@ -173,6 +173,8 @@ docker run --rm -it -p 8080:80 alexeysemenko/restore
 docker login
 docker push alexeysemenko/restore:latest
 
+to run on another pc - dotnet restore -s <local repository url>
+
 
 ****deployment to fly.io (free up to 3 vms) 12/2023*****
 https://fly.io/
