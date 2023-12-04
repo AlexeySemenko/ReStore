@@ -107,11 +107,11 @@ export const catalogSlice = createSlice({
         setMetaData: (state, action) => {
             state.metaData = action.payload;
         },
-        setProduct: (state, action) => {
+        setProduct: (state, _) => {
             //productsAdapter.upsertOne(state, action.payload); //not required cos we get list again
             state.productsLoaded = false; //make load products list again for pagination working correctly
         },
-        removeProduct: (state, action) =>{
+        removeProduct: (state, _) =>{
             //productsAdapter.removeOne(state, action.payload);
             state.productsLoaded = false; //make load products list again for pagination working correctly
         }

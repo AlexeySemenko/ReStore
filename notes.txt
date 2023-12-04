@@ -221,3 +221,8 @@ https://fly.io/
 
   ***react dropzone***
   npm i react-dropzone
+
+
+  ****se scretes + app settings for fly io*****
+  in fly.toml set settings that are public with XXX__XXXXXX (__ instead of :)
+  for secrest set with command - fly secrets set Cloudinary__ApiSecret=xxxxxxxxxxxxxxxx

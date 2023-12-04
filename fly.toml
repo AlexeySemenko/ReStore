@@ -11,6 +11,8 @@ primary_region = "ams"
 
 [env]
   ASPNETCORE_URLS = "http://+:8080"
+  Cloudinary__CloudName="dbspak1bx"
+  Cloudinary__ApiKey="614518224239743"
 
 [http_service]
   internal_port = 8080
