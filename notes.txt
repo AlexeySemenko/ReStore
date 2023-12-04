@@ -218,3 +218,6 @@ https://fly.io/
 
 
   dotnet ef migrations add PublicIdAdded
+
+  ***react dropzone***
+  npm i react-dropzone
