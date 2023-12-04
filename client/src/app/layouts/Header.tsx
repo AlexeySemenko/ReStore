@@ -29,7 +29,7 @@ const navStyles = {
         lg: 20,
         md: 20,
         sm: 15,
-        xs: 15
+        xs: 10
       },
     p: {
         xs:0,
@@ -40,20 +40,20 @@ const navStyles = {
 export default function Header({ isDarkMode, darkModeChange }: Props) {
 
     const {basket} = useAppSelector(state => state.basket);
-
+    const {user} = useAppSelector(state => state.account);
     const itemsCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
         <AppBar position="static">
             <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:{ md: 'center', xs: 'start'}, p: {md:0, xs:0}}}>
                 <Box display='flex' alignItems='center'>
-                    <Typography variant="h6" component={NavLink} to='/' sx={{...navStyles, p: 1}}>
+                    <Typography variant="h6" component={NavLink} to='/' sx={{...navStyles, p: 1, fontSize: { lg: 20, md: 20, sm: 15, xs: 15}}}>
                         RE-STORE
                     </Typography>
                     <Switch checked={isDarkMode} onChange={darkModeChange} />
                 </Box>
                 
-                <List sx={{display: 'flex', flexDirection: { md:'row', xs:'column' }}}>
+                <List sx={{display: 'flex', flexDirection: { md:'row', xs:'column' }, ml: {xs:-2, md:-5}}}>
                     {midLinks.map(({title, path}) => (
                         <ListItem 
                             component={NavLink} 
@@ -63,9 +63,18 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                             {title.toUpperCase()}
                         </ListItem>
                     ))}
+                    {user &&
+                        <ListItem 
+                            component={NavLink} 
+                            to='/inventory'
+                            key='inventory'
+                            sx={{...navStyles, p: {md:1, xs:0}}}>
+                            INVENTORY
+                        </ListItem>
+                    }
                 </List>
                 
-                <Box display='flex' alignItems='center'>
+                <Box display='flex' alignItems='center' sx={{pr:{md:3, xs:1}}}>
                     <IconButton component={Link} to='/basket' size="large" edge='start' color='inherit' sx={{mh: 1}}>
                         <Badge badgeContent={itemsCount} color='secondary'>
                             <ShoppingCart />
