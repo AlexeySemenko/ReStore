@@ -194,3 +194,35 @@ https://fly.io/
 
  ****connect from vscode postgres to fly.io with proxy to db*****
   fly proxy 6543:5432 -a alexey-postgres
+
+
+  ****automapper - search nuget (CTRL+P - open nuget)
+  AutoMapper.Extensions.Microsoft.DependencyInjection by Jimmy Bogard
+
+
+  ***images in cloud - cloudinary****
+    *sign up, free
+    *install CloudinaryDotNet by Cloudinary nuget
+
+  ***setup dotnet ser secrets****
+  *this is gonna be saved on machine level and used in configuration to not expose config values to github
+
+  ***init***
+  dotnet user-secrets init
+
+  ***set params***
+  dotnet user-secrets set "Cloudinary:CloudName" "***"
+  dotnet user-secrets set "Cloudinary:ApiKey" "*************"
+  dotnet user-secrets set "Cloudinary:ApiSecret" "**************************"
+
+
+
+  dotnet ef migrations add PublicIdAdded
+
+  ***react dropzone***
+  npm i react-dropzone
+
+
+  ****se scretes + app settings for fly io*****
+  in fly.toml set settings that are public with XXX__XXXXXX (__ instead of :)
+  for secrest set with command - fly secrets set Cloudinary__ApiSecret=xxxxxxxxxxxxxxxx
