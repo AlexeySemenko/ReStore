@@ -14,7 +14,7 @@ export default function AboutPage(){
 
     return (
         <Container>
-            <Typography gutterBottom variant="h2">Errors for testing purposes</Typography>
+            <Typography gutterBottom variant="h2">My react project with .net backend and PostGres</Typography>
             <ButtonGroup fullWidth>
                 <Button variant='contained' onClick={() => agent.TestErrors.get400Error().catch(error => console.log(error))}>Test 400 Error</Button>
                 <Button variant='contained' onClick={() => agent.TestErrors.get401Error().catch(error => console.log(error))}>Test 401 Error</Button>
