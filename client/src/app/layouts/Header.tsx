@@ -117,8 +117,8 @@ const StyledSearch = styled('div')(
 export default function Header({ isDarkMode, darkModeChange }: Props) {
 
     const {basket} = useAppSelector(state => state.basket);
-    const {user} = useAppSelector(state => state.account);
-    const itemsCount = basket?.items.reduce((sum:any, item:any) => sum + item.quantity, 0);
+    //const {user} = useAppSelector(state => state.account);
+    //const itemsCount = basket?.items.reduce((sum:any, item:any) => sum + item.quantity, 0);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate(); // useNavigate hook for navigation
 
@@ -177,11 +177,11 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                   and closes the drawer by setting the variable open to false
                   */}
                   <Box  sx={{display:'flex', justifyContent:'space-between' , alignItems:{ md: 'center', xs: 'start'}}}>
-                  <IconButton sx={{mb: 2}}>
-                    <CloseIcon onClick={toggleDrawer(false)} />
-                  </IconButton>
-                 <Box>Re-StoRe</Box>
-                  <Divider sx={{mb: 2}} />
+                    <IconButton sx={{mb: 2}}>
+                        <CloseIcon onClick={toggleDrawer(false)} />
+                    </IconButton>
+                    <Box>Re-StoRe</Box>
+                    <Divider sx={{mb: 2}} />
                   </Box>
                   <Box sx={{mb: 2}}>
                     <ListItemButton onClick={() => goTo('/catalog')}>
