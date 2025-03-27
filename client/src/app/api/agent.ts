@@ -43,7 +43,8 @@ axios.interceptors.response.use(async response => {
         status = 404;
         data = { title : error.message, stack: error.stack, code: 404 };
       } else{ 
-        data = error.response as AxiosResponse;
+        data = (error.response as AxiosResponse).data;
+        status = (error.response as AxiosResponse).status
       }
     switch(status){
         case 400:
