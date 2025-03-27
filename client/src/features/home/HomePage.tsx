@@ -32,7 +32,7 @@ export default function HomePage(){
       
             <Box display='flex' justifyContent='center' sx={{p : { md: 4, xs: 1}, mt:10}}>
                 <Typography variant="h1" sx={{ fontSize:{md:30, xs:20}, fontWeight:'bold'}} >
-                    Small react store
+                    Small react store. Demo of react and .net app connected to stripe payments system (without real credit card)
                 </Typography>
             </Box>
         </>
