@@ -16,7 +16,7 @@ public class ImagesController : ControllerBase
     [HttpGet]
     public IActionResult GetImages()
     {
-        string assetsPath = Path.Combine(_env.WebRootPath + "\\images", "Slider");
+        string assetsPath = Path.Combine(Path.Combine(_env.WebRootPath , "images"), "Slider");
         if (!Directory.Exists(assetsPath))
         {
             return NotFound(new { message = "Assets folder not found " +  assetsPath});
