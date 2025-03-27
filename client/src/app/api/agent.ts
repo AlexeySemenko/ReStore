@@ -8,7 +8,7 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 //TODO - remove loading sleep!!!
-const sleep = () => new Promise(resolve => setTimeout(resolve, 200));
+const sleep = () => new Promise(resolve => setTimeout(resolve, 0)); //200
 
 const responseBody = (response : AxiosResponse) => response.data;
 
@@ -23,8 +23,8 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(async response => {
 
-    if(import.meta.env.DEV)
-        await sleep();
+    //if(import.meta.env.DEV)
+    //    await sleep();
 
     const pagination = response.headers['pagination']; //always be lowercase in axios!!
 
@@ -36,6 +36,10 @@ axios.interceptors.response.use(async response => {
     return response;
 
 }, (error: AxiosError) => {
+    if(error?.code == "ERR_NETWORK")
+    {
+        return Promise.reject("Network error! Check backend status");
+    }
     const {data, status} = error.response as AxiosResponse;
     switch(status){
         case 400:
