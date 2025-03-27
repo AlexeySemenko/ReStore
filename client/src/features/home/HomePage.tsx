@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 
@@ -6,10 +7,10 @@ export default function HomePage(){
     const [images, setImages] = useState([]);
 
     useEffect(() => {
-        fetch('/api/images')
+        fetch(axios.defaults.baseURL + 'images')
             .then(response => response.json())
             .then(data => {
-                setImages(data.images.map((img: any) => `/images/${img}`));
+                setImages(data.images.map((img: any) => `/images/Slider/${img}`));
             })
             .catch(error => console.error('Error loading images:', error));
     }, []);
