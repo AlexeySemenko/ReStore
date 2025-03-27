@@ -117,8 +117,8 @@ const StyledSearch = styled('div')(
 export default function Header({ isDarkMode, darkModeChange }: Props) {
 
     const {basket} = useAppSelector(state => state.basket);
-    //const {user} = useAppSelector(state => state.account);
-    //const itemsCount = basket?.items.reduce((sum:any, item:any) => sum + item.quantity, 0);
+    const {user} = useAppSelector(state => state.account);
+    const itemsCount = basket?.items.reduce((sum:any, item:any) => sum + item.quantity, 0);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate(); // useNavigate hook for navigation
 
@@ -180,7 +180,10 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                     <IconButton sx={{mb: 2}}>
                         <CloseIcon onClick={toggleDrawer(false)} />
                     </IconButton>
-                    <Box>Re-StoRe</Box>
+                    <Box>Re-StoRe
+                        <Switch checked={isDarkMode} onChange={darkModeChange} />
+
+                    </Box>
                     <Divider sx={{mb: 2}} />
                   </Box>
                   <Box sx={{mb: 2}}>
@@ -204,6 +207,15 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                       </ListItemIcon>
                       <ListItemText primary="Other" />
                     </ListItemButton>
+
+                    {user && user.roles?.includes('Admin') &&
+                        <ListItemButton onClick={() => goTo('/inventory')}>
+                        <ListItemIcon>
+                          <FolderIcon sx={{color: "primary.main"}} />
+                        </ListItemIcon>
+                        <ListItemText primary="Inventory" />
+                      </ListItemButton>
+                    }
                   </Box>
                   
                   {search}
@@ -216,6 +228,7 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                     left: "50%", 
                     transform: "translate(-50%, 0)"}}
                   >
+
                     <Button variant="contained" sx={{m:1, width: .5}}>
                       Register
                     </Button>
@@ -230,7 +243,15 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                     <Typography variant="h6" component={NavLink} to='/' sx={{...navStyles, p: 1, fontSize: { lg: 20, md: 20, sm: 15, xs: 15}}}>
                         RE-STORE2
                     </Typography>
-                    <Switch checked={isDarkMode} onChange={darkModeChange} />
+                </Box>
+                <Box>
+                    <IconButton component={Link} to='/basket' size="large" edge='start' color='inherit' sx={{mh: 1}}>
+                        <Badge badgeContent={itemsCount} color='secondary'>
+                            <ShoppingCart />
+                        </Badge>
+                    </IconButton>
+
+                    <SignedInMenu />
                 </Box>
 </Toolbar>
         </AppBar>
