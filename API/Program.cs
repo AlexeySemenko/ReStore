@@ -148,6 +148,7 @@ var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
 try
 {
+    logger.LogInformation("ENVi:" + app.Environment.EnvironmentName);
     await context.Database.MigrateAsync();
     await DbInitializer.Initialize(context, userManager);
 }

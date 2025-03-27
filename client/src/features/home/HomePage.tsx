@@ -9,7 +9,7 @@ export default function HomePage(){
         fetch('/api/images')
             .then(response => response.json())
             .then(data => {
-                setImages(data.images.map((img: any) => `/assets/${img}`));
+                setImages(data.images.map((img: any) => `/images/${img}`));
             })
             .catch(error => console.error('Error loading images:', error));
     }, []);

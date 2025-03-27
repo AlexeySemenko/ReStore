@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { productSelectors, fetchFilters, fetchProductsAsync } from "../../features/catalog/CatalogSlice";
+import { productSelectors, fetchProductsAsync } from "../../features/catalog/CatalogSlice";
 import { useAppSelector, useAppDispatch } from "../store/configureStore";
 
 export default function useProducts(){

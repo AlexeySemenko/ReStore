@@ -8,7 +8,7 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 //TODO - remove loading sleep!!!
-const sleep = () => new Promise(resolve => setTimeout(resolve, 0)); //200
+//const sleep = () => new Promise(resolve => setTimeout(resolve, 0)); //200
 
 const responseBody = (response : AxiosResponse) => response.data;
 
