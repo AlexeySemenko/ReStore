@@ -5,9 +5,9 @@ import { useAppSelector } from "../store/configureStore";
 import SignedInMenu from "./SignedInMenu";
 
 const midLinks = [
-    {title: 'Products', path: '/catalog'},
-    {title: 'About', path: '/about'},
-    {title: 'Contact', path: '/contact'}
+    {title: 'catalog', path: '/catalog'},
+    {title: 'errors', path: '/about'},
+    {title: 'contact', path: '/contact'}
 ]
 
 interface Props {

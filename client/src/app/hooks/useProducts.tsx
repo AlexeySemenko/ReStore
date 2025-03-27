@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { productSelectors, fetchProductsAsync } from "../../features/catalog/CatalogSlice";
+import { productSelectors, fetchFilters, fetchProductsAsync } from "../../features/catalog/CatalogSlice";
 import { useAppSelector, useAppDispatch } from "../store/configureStore";
 
 export default function useProducts(){
@@ -11,10 +11,9 @@ export default function useProducts(){
     ///Use 2 useEffects to prevent multiple times querying product / filters with 1 dependancy for each
     useEffect(() => {
       if(!filtersLoaded){
-        dispatch(fetchProductsAsync())
-        .unwrap()
+        dispatch(fetchFilters()).unwrap()
         .catch(() => {
-            setError("Failed to load products. Please try again later.");
+            setError("Failed to load filters. Please try again later.");
         });
       }
     }, [dispatch, filtersLoaded]);
@@ -22,7 +21,10 @@ export default function useProducts(){
 
     useEffect(() => {
       if(!productsLoaded){
-        dispatch(fetchProductsAsync());
+        dispatch(fetchProductsAsync()).unwrap()
+        .catch(() => {
+            setError("Failed to load products. Please try again later.");
+        });
       }
     }, [dispatch, productsLoaded]); //without [] dependancy, it will be called every rerender, not only 1st load
 

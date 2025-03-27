@@ -9,11 +9,15 @@ export default function ServerError(){
             
             {state.error ? (
                 <>
-                    <Typography gutterBottom variant="h3" color='secondary'>
+                    <Typography gutterBottom variant="h5" color='black'>
                         {state.error.title}
                     </Typography>
                     <Divider />
-                    <Typography variant="body1">{state.error.detail || 'Internal server error'}</Typography>
+                    <Typography gutterBottom variant="h6" color='grey'>
+                        {state.error.stack}
+                    </Typography>
+                    <Divider />
+                    <Typography variant="body1">{state.error.code || 'Internal server error'}</Typography>
                 </>
             ) : (
                 <Typography gutterBottom variant="h5">Server error</Typography>
