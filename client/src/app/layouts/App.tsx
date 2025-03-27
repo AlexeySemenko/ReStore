@@ -15,18 +15,8 @@ function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
-  //const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-});
-
-function onChangeDarkMode(){
-  setDarkMode(prev => {
-    localStorage.setItem("darkMode", String(!prev)); // Save new preference
-    return !prev;
-});
-}
   const paleteType = darkMode ? 'dark' : 'light';
 
   const theme = createTheme({
@@ -56,7 +46,9 @@ function onChangeDarkMode(){
 
 
 
-  
+  function onChangeDarkMode(){
+    setDarkMode(!darkMode);
+  }
 
   return (
     <>
