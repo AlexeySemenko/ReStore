@@ -17,12 +17,12 @@ const sortOptions = [
 
 export default function Catalog(){
 
-    const {products, brands, types, filtersLoaded, metaData} = useProducts();
+    const {products, brands, types, filtersLoaded, metaData, error } = useProducts();
     const dispatch = useAppDispatch();
     const {productParams} = useAppSelector(state => state.catalog);
 
     if(!filtersLoaded)
-      return <LoadingComponent message="Loading catalog..."/>
+      return <LoadingComponent message="Loading products..." error={error}/>
   
       //Grid spacing like in bootstrap - 12 parts, 3 + 9 here... (2 columns 3 and 9)
     return (

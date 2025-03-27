@@ -25,7 +25,7 @@ export default function HomePage(){
             </Slider>
             <Box display='flex' justifyContent='center' sx={{p : { md: 4, xs: 1}, mt:10}}>
                 <Typography variant="h1" sx={{ fontSize:{md:30, xs:20}, fontWeight:'bold'}} >
-                    Welcome to Alexey's store!!!
+                    My store - react redux dotnet demo
                 </Typography>
             </Box>
         </>

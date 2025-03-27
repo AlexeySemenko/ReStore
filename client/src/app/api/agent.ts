@@ -8,7 +8,7 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 //TODO - remove loading sleep!!!
-const sleep = () => new Promise(resolve => setTimeout(resolve, 200));
+//const sleep = () => new Promise(resolve => setTimeout(resolve, 200));
 
 const responseBody = (response : AxiosResponse) => response.data;
 
@@ -23,8 +23,8 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(async response => {
 
-    if(import.meta.env.DEV)
-        await sleep();
+    // if(import.meta.env.DEV)
+    //     await sleep();
 
     const pagination = response.headers['pagination']; //always be lowercase in axios!!
 
@@ -36,7 +36,15 @@ axios.interceptors.response.use(async response => {
     return response;
 
 }, (error: AxiosError) => {
-    const {data, status} = error.response as AxiosResponse;
+    let { data, status } = error.response || {} as AxiosResponse;
+    if (!error.response) {
+        // No response received (likely a network error)
+        error.message = 'The server is unavailable. Please check your internet connection or try again later.';
+        status = 404;
+        data = { title : error.message, stack: error.stack, code: 404 };
+      } else{ 
+        data = error.response as AxiosResponse;
+      }
     switch(status){
         case 400:
             if(data.errors){ //this is validation error
@@ -58,6 +66,9 @@ axios.interceptors.response.use(async response => {
         case 403:
             toast.error('You dont have permission!!');
             break;
+        case 404:
+             router.navigate('/server-error', {state: {error : data}});
+            break;
         case 500:
             router.navigate('/server-error', {state: {error : data}});
             break;
@@ -66,7 +77,7 @@ axios.interceptors.response.use(async response => {
     }
 
     return Promise.reject(error.response);
-})
+});
 
 const requests = {
     get: (url: string, params?: URLSearchParams) => axios.get(url, {params}).then(responseBody),
@@ -97,9 +108,9 @@ const Admin = {
 }
 
 const Catalog = {
-    list: (params: URLSearchParams) => requests.get('products', params), //requests.get('buggy/server-error'),
+    list: (params: URLSearchParams) => requests.get('products', params).catch(() => { throw { data: 'Error retrieveing products from server'} }), //requests.get('buggy/server-error'),
     details: (id: number) => requests.get(`products/${id}`),
-    fetchFilters: () => requests.get('products/filters')
+    fetchFilters: () => requests.get('products/filters').catch(() => { throw { data: 'Error retrieveing filters from server'} })
 }
 
 const TestErrors = {
