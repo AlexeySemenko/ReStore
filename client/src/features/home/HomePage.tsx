@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 
 export default function HomePage(){
@@ -8,7 +9,7 @@ export default function HomePage(){
         fetch('/api/images')
             .then(response => response.json())
             .then(data => {
-                setImages(data.images.map(img => `/assets/${img}`));
+                setImages(data.images.map((img: any) => `/assets/${img}`));
             })
             .catch(error => console.error('Error loading images:', error));
     }, []);
@@ -29,7 +30,7 @@ export default function HomePage(){
                     <img src={src} alt={`hero-${index}`} style={{ display: 'block', width: '100%', maxHeight: 500 }} />
                 </div>
             ))}
-      
+        </Slider>
             <Box display='flex' justifyContent='center' sx={{p : { md: 4, xs: 1}, mt:10}}>
                 <Typography variant="h1" sx={{ fontSize:{md:30, xs:20}, fontWeight:'bold'}} >
                     Small react store. Demo of react and .net app connected to stripe payments system (without real credit card)
