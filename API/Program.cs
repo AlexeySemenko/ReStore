@@ -155,7 +155,9 @@ try
 catch (Exception ex)
 {
     logger.LogError(ex, "context.Database.Migrate error!");
-    throw;
+    //throw;
+
+    return;
 }
 
 app.Run();
