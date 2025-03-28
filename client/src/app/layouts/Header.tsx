@@ -24,6 +24,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import { signOut } from "../../features/account/accountSlice";
 import { clearBasket } from "../../features/basket/BasketSlice";
+import { Logout as LogoutIcon, Login as LoginIcon, PersonAdd as RegisterIcon } from '@mui/icons-material';
+
 
 const midLinks = [
     {title: 'catalog', path: '/catalog'},
@@ -237,7 +239,9 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                     transform: "translate(-50%, 0)"}}
                   >
                     {user ? (
-                      <Button variant="outlined" sx={{ 
+                      <Button variant="outlined" 
+                      title={`LogOut ${user.name}`}
+                      sx={{ 
                         m: 1, 
                         px: 2,
                         minWidth: "120px",
@@ -252,16 +256,16 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                           dispatch(signOut());
                           dispatch(clearBasket());
                       }}>
-                        LogOut {user.name}
+                        <LogoutIcon />&nbsp;{user.name}
                       </Button> 
                               
-                                ) : (
+                    ) : (
                       <>
-                      <Button variant="contained" sx={{m:1, width: .5}}>
-                        Register
+                      <Button variant="contained" sx={{m:1, width: .5}} component={Link} to='/register'>
+                        <RegisterIcon />&nbsp;Register
                       </Button>
                       <Button variant="outlined" sx={{m:1, width: .5}} component={Link} to='/login' onClick={toggleDrawer(false)}>
-                        Login
+                        <LoginIcon />&nbsp;Login
                       </Button> 
                           
                     </>

@@ -1,4 +1,4 @@
-import { Typography, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Box } from "@mui/material";
+import { Typography, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Box, IconButton } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { currencyFormat } from "../../app/util/util";
 import useProducts from "../../app/hooks/useProducts";
@@ -10,6 +10,7 @@ import ProductForm from "./ProductForm";
 import { Product } from "../../app/models/products";
 import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function Inventory() {
     const dispatch = useAppDispatch();
@@ -46,7 +47,19 @@ export default function Inventory() {
         <>
             <Box display='flex' justifyContent='space-between'>
                 <Typography sx={{ p: 2 }} variant='h4'>Inventory</Typography>
-                <Button onClick={() => setEditMode(true)} sx={{ m: 2 }} size='large' variant='contained'>Create</Button>
+                <IconButton title="Add new item"
+                        onClick={() => setEditMode(true)}
+                        sx={{
+                            backgroundColor: "lightblue",
+                            color: "black",
+                            width: 56,
+                            height: 56,
+                            borderRadius: "50%",
+                            "&:hover": { backgroundColor: "skyblue" }
+                        }}
+                    >
+                        <AddIcon />
+                    </IconButton>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">

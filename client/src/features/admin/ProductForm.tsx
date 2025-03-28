@@ -1,4 +1,4 @@
-import { Typography, Grid, Paper, Box, Button } from "@mui/material";
+import { Typography, Grid, Paper, Box, Button, IconButton } from "@mui/material";
 import { FieldValues, useForm } from "react-hook-form";
 import AppTextInput from "../../app/components/AppTextInput";
 import { Product } from "../../app/models/products";
@@ -12,6 +12,7 @@ import agent from "../../app/api/agent";
 import { useAppDispatch } from "../../app/store/configureStore";
 import { setProduct } from "../catalog/CatalogSlice";
 import { LoadingButton } from "@mui/lab";
+import { ArrowBack as ArrowBackIcon, Send as SendIcon } from '@mui/icons-material';
 
 interface Props {
     product?: Product;
@@ -91,8 +92,31 @@ export default function ProductForm({ product, cancelEdit }: Props) {
                     </Grid>
                 </Grid>
                 <Box display='flex' justifyContent='space-between' sx={{ mt: 3 }}>
-                    <Button onClick={cancelEdit} variant='contained' color='inherit'>Cancel</Button>
-                    <LoadingButton loading={isSubmitting} variant='contained' color='success' type="submit">Submit</LoadingButton>
+                        <IconButton title="Cancel"
+                            onClick={cancelEdit}
+                            sx={{
+                                backgroundColor: "lightblue",
+                                color: "black",
+                                width: 56,
+                                height: 56,
+                                borderRadius: "50%",
+                                "&:hover": { backgroundColor: "skyblue" }
+                            }}
+                        >
+                            <ArrowBackIcon />
+                        </IconButton>
+                        <IconButton title="Add new item" type="submit"
+                            sx={{
+                                backgroundColor: "lightblue",
+                                color: "black",
+                                width: 56,
+                                height: 56,
+                                borderRadius: "50%",
+                                "&:hover": { backgroundColor: "skyblue" }
+                            }}
+                        >
+                            <SendIcon />
+                        </IconButton>
                 </Box>
             </form>
         </Box>
