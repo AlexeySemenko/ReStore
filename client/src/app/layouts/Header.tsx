@@ -185,11 +185,10 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                         <CloseIcon onClick={toggleDrawer(false)} />
                     </IconButton>
                     {user && (
-                        <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-                          Hi, {user.name}!
-                          <Switch checked={isDarkMode} onChange={darkModeChange} title="DarkMode" />
-                        </Box>
+                        <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Hi, {user.name}!</Box>
                      )}
+                     {!user && <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'primary' }}>RE-Store</Box>}
+                     <Switch checked={isDarkMode} onChange={darkModeChange} title="DarkMode" />
                   </Box>
                   <Box sx={{mb: 2}}>
                     <ListItemButton onClick={() => goTo('/catalog')}>
