@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: store
+    ports:
+      - "5433:5433"
+    networks:
+      - app-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  app:
+    image: alexeysemenko/restore:latest  # Replace with your actual image name
+    container_name: app-container
+    build:
+      context: .  # Build from the Dockerfile in the current directory
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=postgres-container;Port=5432;Username=appuser;Password=secret;Database=store;"
+      Cloudinary__CloudName: "dbspak1bx"
+      Cloudinary__ApiKey: "614518224239743"
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

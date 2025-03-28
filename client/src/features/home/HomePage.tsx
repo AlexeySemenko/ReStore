@@ -28,13 +28,27 @@ export default function HomePage(){
          <Slider {...settings}>
             {images.map((src, index) => (
                 <div key={index}>
-                    <img src={src} alt={`hero-${index}`} style={{ display: 'block', width: '100%', maxHeight: 500 }} />
+                    <Box 
+                        component="img"
+                        src={src} 
+                        alt={`hero-${index}`}
+                        sx={{ 
+                            display: 'block', 
+                            maxHeight: 400, 
+                            objectFit: 'cover', 
+                            mx: 'auto' // Centers the image horizontally
+                        }}  />
                 </div>
             ))}
         </Slider>
             <Box display='flex' justifyContent='center' sx={{p : { md: 4, xs: 1}, mt:10}}>
                 <Typography variant="h1" sx={{ fontSize:{md:30, xs:20}, fontWeight:'bold'}} >
                     My store - react redux dotnet demo
+                </Typography>
+            </Box>
+            <Box sx={{ textAlign: "center", py: 2, bgcolor: "background.default", mt: 4 }}>
+                <Typography variant="body2" color="text.secondary">
+                    © 2025 alexey-prod
                 </Typography>
             </Box>
         </>

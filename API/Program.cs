@@ -61,6 +61,11 @@ else
     // Use connection string provided at runtime by FlyIO.
     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
+    if(string.IsNullOrEmpty(connUrl))
+    {
+        throw new ArgumentNullException("DATABASE_URL");
+    }
+
     // Parse connection URL to connection string for Npgsql
     connUrl = connUrl.Replace("postgres://", string.Empty);
     var pgUserPass = connUrl.Split("@")[0];
