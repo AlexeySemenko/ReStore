@@ -270,9 +270,9 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                 </Box>
  </Drawer>
 
- <Box display='flex' alignItems='center'>
+                <Box display='flex' alignItems='center'>
                     <Typography variant="h6" component={NavLink} to='/' sx={{...navStyles, p: 1, fontSize: { lg: 20, md: 20, sm: 15, xs: 15}}}>
-                        RE-STORE2
+                        RE-STORE
                     </Typography>
                 </Box>
                 <Box>
