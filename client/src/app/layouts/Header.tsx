@@ -2,7 +2,7 @@ import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../store/configureStore";
+import { useAppDispatch, useAppSelector } from "../store/configureStore";
 import SignedInMenu from "./SignedInMenu";
 import { useState } from "react";
 
@@ -22,6 +22,8 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+import { signOut } from "../../features/account/accountSlice";
+import { clearBasket } from "../../features/basket/BasketSlice";
 
 const midLinks = [
     {title: 'catalog', path: '/catalog'},
@@ -121,6 +123,8 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
     const itemsCount = basket?.items.reduce((sum:any, item:any) => sum + item.quantity, 0);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate(); // useNavigate hook for navigation
+    const dispatch = useAppDispatch();
+    
 
     const goTo = (url: string) => {
         navigate(url);
@@ -180,11 +184,12 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                     <IconButton sx={{mb: 2}}>
                         <CloseIcon onClick={toggleDrawer(false)} />
                     </IconButton>
-                    <Box>Re-StoRe
-                        <Switch checked={isDarkMode} onChange={darkModeChange} />
-
-                    </Box>
-                    <Divider sx={{mb: 2}} />
+                    {user && (
+                        <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+                          Hi, {user.name}!
+                          <Switch checked={isDarkMode} onChange={darkModeChange} title="DarkMode" />
+                        </Box>
+                     )}
                   </Box>
                   <Box sx={{mb: 2}}>
                     <ListItemButton onClick={() => goTo('/catalog')}>
@@ -207,14 +212,18 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                       </ListItemIcon>
                       <ListItemText primary="Other" />
                     </ListItemButton>
-
+                   
                     {user && user.roles?.includes('Admin') &&
+                    <>
+                        <Divider />
+                        
                         <ListItemButton onClick={() => goTo('/inventory')}>
                         <ListItemIcon>
                           <FolderIcon sx={{color: "primary.main"}} />
                         </ListItemIcon>
                         <ListItemText primary="Inventory" />
                       </ListItemButton>
+                      </>
                     }
                   </Box>
                   
@@ -228,14 +237,37 @@ export default function Header({ isDarkMode, darkModeChange }: Props) {
                     left: "50%", 
                     transform: "translate(-50%, 0)"}}
                   >
-
-                    <Button variant="contained" sx={{m:1, width: .5}}>
-                      Register
-                    </Button>
-                    <Button variant="outlined" sx={{m:1, width: .5}}>
-                      Login
-                    </Button> 
-                  </Box>
+                    {user ? (
+                      <Button variant="outlined" sx={{ 
+                        m: 1, 
+                        px: 2,
+                        minWidth: "120px",
+                        maxWidth: "250px",
+                        display: "flex",
+                        justifyContent: "center",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis"
+                      }} 
+                      onClick={() => {
+                          dispatch(signOut());
+                          dispatch(clearBasket());
+                      }}>
+                        LogOut {user.name}
+                      </Button> 
+                              
+                                ) : (
+                      <>
+                      <Button variant="contained" sx={{m:1, width: .5}}>
+                        Register
+                      </Button>
+                      <Button variant="outlined" sx={{m:1, width: .5}} component={Link} to='/login' onClick={toggleDrawer(false)}>
+                        Login
+                      </Button> 
+                          
+                    </>
+                    )}
+                </Box>
                 </Box>
  </Drawer>
 

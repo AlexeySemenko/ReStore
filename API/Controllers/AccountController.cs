@@ -52,6 +52,7 @@ namespace API.Controllers
             
             return new UserDto
             {
+                Name = user.UserName,
                 Email = user.Email,
                 Token = await tokenService.GenerateToken(user),
                 Basket = (anonBasket != null ? anonBasket : userBasket)?.MapBasketToDto()
@@ -63,7 +64,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterDto registerDto)
         {
-            var user = new User{ UserName = registerDto.Username, Email = registerDto.Email};
+            var user = new User{ UserName = registerDto.Username, Email = registerDto.Email };
 
             var result = await userManager.CreateAsync(user, registerDto.Password);
 
@@ -86,11 +87,13 @@ namespace API.Controllers
         [HttpGet("currentUser")]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
+            
             var user = await userManager.FindByNameAsync(User.Identity.Name);
             var userBasket = await RetrieveBasket(User.Identity.Name);
 
             return new UserDto
             {
+                Name = user.UserName,
                 Email = user.Email,
                 Token = await tokenService.GenerateToken(user),
                 Basket = userBasket?.MapBasketToDto()
